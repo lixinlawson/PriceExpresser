@@ -1,0 +1,23 @@
+<h1>Products Tracking List</h1>
+<table id = "customers">
+  <tr class = "alt">
+    <th>Prduct Name</th>
+    <th>Description</th>
+    <th>Expected Price</th>
+    <th colspan="3">Options</th>
+  </tr>
+  <% @items.each do |item| %>
+  	<tr>
+  	<td><%= link_to item[0], '/products/' + item[0] %></td>	
+  	<td><%= item[1] %></td>
+	<%= form_for orders_path, url: order_path(item[3]), method: :put do |f| %>
+	
+		<td><%= text_field_tag :q, params[:q], placeholder: item[2] %></td>
+		<td><%= submit_tag "Update" %></td>
+		<% end %>
+		<td><%= button_to 'Delete', order_path(item[3]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		
+	
+	</tr>
+<% end %>
+</table>

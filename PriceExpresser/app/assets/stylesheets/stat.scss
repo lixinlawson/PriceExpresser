@@ -1,0 +1,22 @@
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.line {
+  fill: none;
+  stroke-width: 1.5px;
+}
+
+.dot {
+  stroke-width: 1.5px;
+}
+.dot-selected {
+  fill: #B0C4DE;
+  stroke: #B0C4DE;
+  stroke-width: 1.5px;
+}
+
+.metrics-container {
+  margin-left: 200px;
+}

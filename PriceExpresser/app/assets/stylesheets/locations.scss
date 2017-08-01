@@ -1,0 +1,16 @@
+// Place all the styles related to the Locations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#stores {
+	margin-bottom: 1em;
+}
+
+#stroes > button {
+	color: red;
+}
+
+#stroes > button:hover {
+	background: #FFFFFF;
+	color: red;
+}

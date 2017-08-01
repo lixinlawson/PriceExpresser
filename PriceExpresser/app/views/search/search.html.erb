@@ -1,0 +1,40 @@
+<h1>Search Result</h1>
+<% if not logged_in? %>
+<div id="error_explanation" class = "center jumbotron">
+<div class="alert alert-danger">
+<p>PLEASE LOGIN first to use this service!</p>
+</div>
+<%= link_to "Sign Up", signup_path, class: "btn btn-lg btn-primary" %>
+  &nbsp;&nbsp;&nbsp;
+<%= link_to "Log In", login_path, class: "btn btn-lg btn-primary" %>
+</div>
+
+<% else %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for search_path, url: search_path, method: :get do |f| %>
+      <div class = "input-group">
+      <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Enter keyword ..." %>
+      <span class = "input-group-btn"><%= submit_tag " Search for Product ", name: nil, class: "btn btn-info" %></span>
+      </div>
+    <% end %>
+    </div>
+</div>
+
+<ul>
+  <% @products.each do |product| %>
+    <li>
+      <h3>
+        <%= link_to product.try(:highlight).try(:product_name) ? product.highlight.product_name[0].html_safe : product.product_name, controller: "products",action: "show",id: product.product_name%>
+      </h3>
+      <% if product.try(:highlight).try(:text) %>
+        <% product.highlight.text.each do |snippet| %>
+          <p><%= snippet.html_safe %>...</p>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<% end %>

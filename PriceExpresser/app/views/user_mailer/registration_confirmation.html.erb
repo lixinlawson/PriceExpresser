@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to Price Expresser, <%= @user.name %> !</h1>
+    <p>
+      Thanks for registering! To confirm your registration please visit the URL below.
+    </p>
+    <p>
+      <%= confirm_email_user_url(@user.confirm_token) %>
+    </p>
+    <p>Thanks for registeration and have a great day!</p>
+  </body>
+</html>

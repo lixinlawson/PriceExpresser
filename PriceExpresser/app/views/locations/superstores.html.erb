@@ -1,0 +1,27 @@
+<script src="//maps.google.com/maps/api/js?v=3.18&sensor=false&client=&key=&libraries=geometry&language=&hl=&region="></script> 
+<script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"></script>
+
+<h1>List of Superstore and Location</h1>
+<%= render 'nav' %>
+<table class = "table">
+  <thead>
+    <tr class = "danger">
+      <th>Name</th>
+      <th>Address</th>
+      <th>Phone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @superstores.each do |location| %>
+      <tr class = "<%= location.catalog %>" >
+        <td class = "success" style = "font-weight:bold;"><%= location.name %></td>
+        <td class = "active"><%= link_to " #{location.address}", location_path(location), class: "glyphicon glyphicon-map-marker" %></td>
+        <td class = "info"><%= location.phone %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render 'map' %>
+
+

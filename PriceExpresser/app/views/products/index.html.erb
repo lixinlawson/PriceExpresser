@@ -1,0 +1,32 @@
+<h1>List of All Products Added</h1>
+<% if not logged_in? %>
+<div id="error_explanation" class = "center jumbotron">
+<div class="alert alert-danger">
+<p>PLEASE LOGIN first to use this service!</p>
+</div>
+<%= link_to "Sign Up", signup_path, class: "btn btn-lg btn-primary" %>
+  &nbsp;&nbsp;&nbsp;
+<%= link_to "Log In", login_path, class: "btn btn-lg btn-primary" %>
+</div>
+<% else %>
+<%= render 'search' %>
+
+<table id = "customers">
+  <tr class = "alt">
+    <th>Prduct Name</th>
+    <th>Description</th>
+    <th>Options</th>
+  </tr>
+ 
+  <% @products_all.each do |product| %>
+    <tr>
+      <td><a href= "<%= product_path(product) %>" > <%= product.product_name %></span></a></td>
+      </td>
+      <td><%= product.description %></td>
+      <td><%= link_to 'Info', product_path(product) %></td>
+    </tr>
+  <% end %>
+</table>
+<% end %>
+
+

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  userId: MyString
+  expectedPrice: 1.5
+  notified: 1
+  product_id: 
+
+two:
+  userId: MyString
+  expectedPrice: 1.5
+  notified: 1
+  product_id: 

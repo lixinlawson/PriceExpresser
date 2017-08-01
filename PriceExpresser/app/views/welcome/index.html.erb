@@ -1,0 +1,14 @@
+<div class="center jumbotron">
+<% if not logged_in? %>
+	<h1>Welcome to Price Expresser</h1>
+
+	<h2>Presented by <abbr title = "Simon Fraser University">SFU</abbr> CMPT470 Fall 2015 Group 9 - <abbr title = "Make Perfect Website">M.P.W.</abbr></h2>
+
+	<%= link_to "Sign Up", signup_path, class: "btn btn-lg btn-primary" %>
+	&nbsp;&nbsp;&nbsp;
+	<%= link_to "Log In", login_path, class: "btn btn-lg btn-primary" %>
+<% else %>
+	<h1>Hello, <%= current_user.name %> !</h1>
+	<h2>What would you like to do today?</h2>
+<% end %>
+</div>

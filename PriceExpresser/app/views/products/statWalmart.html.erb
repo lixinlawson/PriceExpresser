@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<head>
+<% provide(:title, "Statistical Graph") %>
+<script src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+</head>
+<body>
+<h1><%= @product.product_name %> Price Changes From Walmart</h1>
+<div id = "pricedate" style = "display:none;">
+  <% if @product_walmart %>          
+      <% @product_walmart.each do |pp|%>
+      <p class = "prices"> <%=pp.price%> </p>
+      <p class = "dates"> <%=pp.created_at%> </p>
+    <% end %>
+  <% end %>
+</div>
+<%= render "chart" %>
+</body>
+</html>

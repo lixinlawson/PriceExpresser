@@ -1,0 +1,84 @@
+<h1>Product Detail</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%= @product.product_name %>
+</p>
+ 
+<p>
+  <strong>Category:</strong>
+  <%= @product.category.capitalize %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<h2>Compare Price Table</h2>
+
+  <table id = "customers" border= "1" style="width:100%">
+	  <tr class="alt">
+		  <td align="center">Source</td>
+		  <td align="center">Price</td>
+		  <td align="center">Image</td>
+		  <td align="center">Link to Source</td>
+	  </tr>
+	  <% @product.prices.last(3).each do |price| %>
+	  <tr>
+		  <td align="center"><%= price.source %>
+        &nbsp;&nbsp;&nbsp;
+        <% if price.source == "Walmart" %>
+          <a href= "<%= locations_walmarts_path %>" ><span class="glyphicon glyphicon-map-marker"></span></a>
+        <% else %>
+          <a href= "<%= price.url %>" ><span class="glyphicon glyphicon-map-marker"></span></a>
+        <% end %>
+      </td>
+		  <td align="center"><%= price.price %>
+      &nbsp;&nbsp;&nbsp; 
+      
+      <% if price.source == "eBay" %>
+        <a href= "<%= statEBay_product_path(@product) %>" > <span class="glyphicon glyphicon-stats"></span></a>
+      <% elsif price.source == "Amazon" %>
+        <a href= "<%= statAmazon_product_path(@product) %>" > <span class="glyphicon glyphicon-stats"></span></a>
+      <% else %>
+        <a href= "<%= statWalmart_product_path(@product) %>" > <span class="glyphicon glyphicon-stats"></span></a>
+      <% end %>
+      </td>
+		  <td align="center"><%= image_tag(price.img, size: "60")%></td>
+		  <td align="center"><%= link_to 'Visit Source Website', price.url %></td>
+	  </tr>
+	  <% end %>
+  </table>
+  
+
+<h2>Setup Price Threshold</h2>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+ <%= form_for([@product, @product.subs.build]) do |f| %>
+	<p>
+      <%= f.hidden_field :userId, :value => current_user.id %>
+    </p>
+	
+	<p>
+      <%= f.text_field :expectedPrice, placeholder: "Enter the expected price here..."%>
+    </p>
+	<p>
+      <%= f.hidden_field :notified, :value => 0 %>
+    </p>
+    <p>
+      <%= f.submit 'Add Expected Price', class: "btn btn-primary" %>
+    </p>
+  <% end %>
+</div>
+</div>
+  
+
+<% if @product.subs.where(userId: current_user.id).last != nil %>
+<h2>Your Current Price Threshold is: <%= @product.subs.where(userId: current_user.id).last.expectedPrice %> </h2>
+
+<% end %>
+
+<% @a_p %>
+<% @w_p %>
+

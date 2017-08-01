@@ -1,0 +1,55 @@
+<script src="//maps.google.com/maps/api/js?v=3.18&sensor=false&client=&key=&libraries=geometry&language=&hl=&region="></script> 
+<script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"></script>
+
+
+<p id="notice"><%= notice %></p>
+
+<h1><%= @location.name %></h1>
+
+<p>
+  <strong>Address:</strong>
+  <%= @location.address %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @location.phone %>
+</p>
+<br />
+<p>
+  <strong>Enter Your Location:</strong>
+  <div class = "input-group">
+    <input type = "text" id = "origin" class = "form-control"  placeholder= "Enter your location ..."/>
+    <span class = "input-group-btn "><button onclick ="getDirection()" class = "btn btn-success" >Get Direction</button></span>
+  </div>
+</p>
+<br />
+<div style='width: 500px;'>
+  <div id="map" style='width: 500px; height: 300px;'></div>
+</div>
+<script type ="text/javascript">
+setTimeout( function(){
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(13);
+  });
+},500);
+
+function getDirection() {
+  var origin = document.getElementById("origin").value;
+  var destination = "<%= @location.address %>";
+  var url = "https://www.google.com/maps/dir/".concat(origin,"/",destination);
+  window.open(url);
+}
+
+</script>
+
+<!-- 
+<p>
+  <%= link_to 'Edit', edit_location_path(@location) %> |
+  <%= link_to 'Back', locations_path %> | 
+  <%= link_to 'Delete', @location, method: :delete, data: { confirm: 'Are you sure?' } %>
+</p> -->

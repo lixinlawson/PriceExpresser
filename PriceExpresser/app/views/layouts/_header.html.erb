@@ -1,0 +1,67 @@
+<header>
+    <nav class = "navbar navbar-inverse navbar-fixed-top">
+    <div class = "container-fluid">
+        <div class = "navbar-header">
+            <a href = "<%= root_path %>" class = "navbar-brand"><img src = "<%= image_url 'logo.png' %>" alt = "logo" height = "20" width = "60"/> <span class = "navheader">Price Expresser</span></a>
+            <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
+                <span class = "icon-bar"></span>
+                <span class = "icon-bar"></span>
+                <span class = "icon-bar"></span>
+            </button>
+        </div>
+        <div class = "collapse navbar-collapse navbar-ex1-collapse navHeaderCollapse">
+            <ul class = "nav navbar-nav navbar-right">
+                <li title = "Home Page"><a href= "<%= '/orders' %>" ><span class="glyphicon glyphicon-home navheader"></span></a></li>
+                 <li title = "Help"><a href= "<%= help_path %>" ><span class="glyphicon glyphicon-question-sign navheader"></span></a></li>                
+                <li class = "dropdown" title = "Search">
+                     <a href="#" class = "dropdown-toggle" data-toggle = "dropdown"><span class="glyphicon glyphicon-search navheader"></span></a>
+                     <ul class = "dropdown-menu" role = "menu">
+                        <li>
+                            <%= form_for search_path, url: search_path, class: "navbar-form", method: :get do |f| %>
+                                <div class = "input-group">
+                                <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search ..." %>
+                                <span class = "input-group-btn"><%= submit_tag "Go!", name: nil, class: "btn btn-default" %></span>
+                                </div>
+                            <% end %>
+                        </li>
+                     </ul>
+                <li>
+                 <li title = "All Products"><a href= "<%= products_path %>" ><span class="glyphicon glyphicon glyphicon-list-alt navheader"></span></a></li>                 
+                <li title = "Location Service"><a href= "<%= locations_path %>" ><span class="glyphicon glyphicon-map-marker navheader"></span></a></li> 
+                <% if logged_in? %>
+                    <li class = "dropdown">
+                        <a href="#" class = "dropdown-toggle" data-toggle = "dropdown"><span title = "Account"class="glyphicon glyphicon-th-list navheader"></span></a>
+                        <ul class="dropdown-menu" role = "menu">
+                            <li><a href= "<%= '/orders' %>" ><span class="glyphicon glyphicon glyphicon-list-alt">&nbsp;Tracking</span></a></li>
+                            <li><a href= "<%= edit_user_path(current_user) %>" ><span class="glyphicon glyphicon-cog">&nbsp;Setting</span></a></li>
+                            <li class="divider"></li>
+                            <li><%= link_to " LogOut", logout_path, method: "delete", class: "glyphicon glyphicon-off" %></li>
+                        </ul>
+                  </li>
+                <% else %>
+                     <li title = "Log In"><a href= "<%= login_path %>" ><span class="glyphicon glyphicon-user navheader"></span></a></li> 
+                <% end %>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+</header>  
+
+<div id="error_explanation">
+<% if flash[:success] %>
+<div class="alert alert-success">
+    <ul>
+        <li><%= flash[:success] %></li>
+    </ul>
+</div>
+<% end %>
+
+<% if flash[:error] %>
+<div class="alert alert-danger">
+    <ul>
+        <li><%= flash[:error] %></li>
+    </ul>
+</div>
+<% end %>
+</div>

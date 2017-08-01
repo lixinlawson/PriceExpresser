@@ -1,0 +1,12 @@
+<h1>Leave A Message</h1>
+<%= simple_form_for @contact, :html => {:class => 'form-horizontal' } do |f| %>
+    <% if logged_in? %>
+	    <%= f.input :name, :required => true, :input_html => {:value => current_user.name } %>
+	    <%= f.input :email, :required => true,  :input_html => {:value => current_user.email }%>
+    <% else %>
+    	<%= f.input :name, :required => true %>
+	    <%= f.input :email, :required => true %>
+	<% end %>
+    <%= f.input :message, :as => :text, :required => true %>
+    <%= f.button :submit, 'Send Message', :class=> "btn btn-primary" %>
+<% end %>
